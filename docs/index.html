@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Skills — Li-Mingshuang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --bg-alt: #F2EFE9;
+      --text: #2C2825;
+      --text-muted: #7A7269;
+      --accent: #2E8B72;
+      --accent-light: rgba(46,139,114,0.12);
+      --card-shadow: 0 2px 16px rgba(44,40,37,0.08);
+      --radius: 14px;
+      --font-display: 'Noto Serif SC', serif;
+      --font-body: 'Noto Sans SC', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.7; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(46,139,114,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── Section ── */
+    .section { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+
+    /* ── Skill Cards ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: 24px;
+    }
+    .skill-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(44,40,37,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(44,40,37,0.12); }
+
+    .skill-header { display: flex; align-items: flex-start; gap: 16px; }
+    .skill-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .skill-meta { flex: 1; }
+    .skill-name { font-weight: 700; font-size: 18px; margin-bottom: 4px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 11px; font-weight: 600; padding: 2px 8px;
+      border-radius: 20px; letter-spacing: 0.04em;
+    }
+    .tag-green { background: var(--accent-light); color: var(--accent); }
+    .tag-amber { background: rgba(201,123,26,0.12); color: #C97B1A; }
+    .tag-blue { background: rgba(45,106,159,0.12); color: #2D6A9F; }
+
+    .skill-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    .skill-install {
+      background: #1E1E2E;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #a6e3a1;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .skill-install .cmd-comment { color: #6c7086; }
+
+    .skill-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .skill-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .link-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .link-primary:hover { background: #267a63; }
+    .link-secondary {
+      background: var(--bg-alt);
+      color: var(--text);
+      border: 1px solid rgba(44,40,37,0.12);
+    }
+    .link-secondary:hover { background: #e8e4dd; }
+
+    /* ── Install guide ── */
+    .install-section {
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-top: 48px;
+    }
+    .install-section h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+    .install-steps { display: flex; flex-direction: column; gap: 16px; }
+    .install-step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-n {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .step-text { font-size: 14px; }
+    .step-text code {
+      background: #1E1E2E; color: #a6e3a1;
+      padding: 1px 6px; border-radius: 4px;
+      font-family: var(--font-mono); font-size: 12px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(44,40,37,0.08);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">⚡ Claude Code Skills</div>
+  <h1>用 AI 写的<br>给 AI 用的 Skill</h1>
+  <p>一组扩展 Claude Code 能力的 skill，让日常对话更聪明、记录更自然、工作流更顺畅。</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num" id="skill-count">2</div>
+      <div class="stat-label">已发布 Skill</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">可扩展</div>
+    </div>
+  </div>
+</div>
+
+<!-- Skills -->
+<div class="section">
+  <h2 class="section-title">已发布的 Skill</h2>
+  <p class="section-subtitle">每个 skill 都有交互式课程页，安装前先看看它能做什么</p>
+
+  <div class="skills-grid">
+
+    <!-- context-injector -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <div class="skill-icon">🧩</div>
+        <div class="skill-meta">
+          <div class="skill-name">context-injector</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-amber">自动化</span>
+            <span class="skill-tag tag-blue">工具类</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-desc">
+        每次发消息时自动注入上下文——时间、天气、Git 分支状态等。Claude 不用你说就知道"现在几点、你在哪个分支"。通过 <code style="font-family:var(--font-mono);font-size:12px;background:var(--bg-alt);padding:1px 5px;border-radius:3px;">UserPromptSubmit</code> hook 实现，配置文件控制开关，支持自定义数据源。
+      </div>
+      <div class="skill-install">
+        <span class="cmd-comment"># 安装</span><br>
+        git clone https://github.com/Li-Mingshuang/claude-context-injector<br>
+        cp -r claude-context-injector/skill ~/.claude/skills/context-injector
+      </div>
+      <div class="skill-links">
+        <a class="skill-link link-primary" href="https://li-mingshuang.github.io/claude-context-injector/course.html" target="_blank">📖 课程页</a>
+        <a class="skill-link link-secondary" href="https://github.com/Li-Mingshuang/claude-context-injector" target="_blank">⭐ GitHub</a>
+      </div>
+    </div>
+
+    <!-- notes-diary -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <div class="skill-icon">📓</div>
+        <div class="skill-meta">
+          <div class="skill-name">记录（notes-diary）</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-green">知识管理</span>
+            <span class="skill-tag tag-green">Obsidian</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-desc">
+        一句话记日记或笔记。说"记日记"写入 Journal/ 带时间戳和 AI 精炼反馈，说"记笔记"创建格式化 Markdown 并自动更新索引。30 分钟内的感悟合并到同一时间块，意图模糊时主动确认。
+      </div>
+      <div class="skill-install">
+        <span class="cmd-comment"># 安装</span><br>
+        git clone https://github.com/Li-Mingshuang/claude-skill-notes-diary<br>
+        cp -r claude-skill-notes-diary ~/.claude/skills/记录
+      </div>
+      <div class="skill-links">
+        <a class="skill-link link-primary" href="https://li-mingshuang.github.io/claude-skill-notes-diary/course.html" target="_blank">📖 课程页</a>
+        <a class="skill-link link-secondary" href="https://github.com/Li-Mingshuang/claude-skill-notes-diary" target="_blank">⭐ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 安装指引 -->
+  <div class="install-section">
+    <h3>🚀 通用安装方式</h3>
+    <div class="install-steps">
+      <div class="install-step">
+        <div class="step-n">1</div>
+        <div class="step-text">确认 Claude Code 已安装，skills 目录在 <code>~/.claude/skills/</code></div>
+      </div>
+      <div class="install-step">
+        <div class="step-n">2</div>
+        <div class="step-text">Clone 对应仓库，将 skill 目录复制到 <code>~/.claude/skills/&lt;skill-name&gt;/</code></div>
+      </div>
+      <div class="install-step">
+        <div class="step-n">3</div>
+        <div class="step-text">重启 Claude Code，在对话中说出触发词即可使用</div>
+      </div>
+      <div class="install-step">
+        <div class="step-n">4</div>
+        <div class="step-text">部分 skill（如 context-injector）有 hook 配置，首次运行时 skill 会自动完成初始化</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  由 <a href="https://github.com/Li-Mingshuang" target="_blank">Li-Mingshuang</a> 开发 ·
+  <a href="https://github.com/Li-Mingshuang/claude-skills" target="_blank">查看仓库</a>
+</footer>
+
+</body>
+</html>
