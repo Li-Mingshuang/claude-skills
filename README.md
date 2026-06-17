@@ -12,4 +12,4 @@ Li-Mingshuang 发布的 Claude Code skill 合集。
 | [记录](https://github.com/Li-Mingshuang/claude-skill-notes-diary) | 一句话记日记或笔记，自动管理索引 | [→ 查看](https://li-mingshuang.github.io/claude-skill-notes-diary/course.html) |
 | [scrape-jobs-portal](https://github.com/Li-Mingshuang/claude-skill-scrape-jobs) | 抓取招聘官网全量岗位，去重分类输出 Markdown | [→ 查看](https://li-mingshuang.github.io/claude-skill-scrape-jobs/course.html) |
 | [ohmycv](https://github.com/Li-Mingshuang/claude-skill-ohmycv) | 一句话启动本地 oh-my-cv 简历编辑器 | [→ 查看](https://li-mingshuang.github.io/claude-skill-ohmycv/course.html) |
-| [mde-focus-fix](https://github.com/Li-Mingshuang/claude-skill-mde-focus-fix) | 修复 MDE 插件预览 tab 不自动切换焦点的 bug | [→ 查看](https://li-mingshuang.github.io/claude-skill-mde-focus-fix/course.html) |
+| [mde-focus-fix](https://github.com/Li-Mingshuang/ai-skill-mde-focus-fix) | 修复 MDE 插件预览 tab 不自动切换焦点的 bug | [→ 查看](https://li-mingshuang.github.io/ai-skill-mde-focus-fix/course.html) |
